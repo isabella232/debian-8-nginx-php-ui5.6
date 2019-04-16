@@ -51,7 +51,7 @@ RUN \
 		chmod 777 /usr/lib/php/${PHPVER} && \
 		pecl channel-update pecl.php.net && \
 		pecl install gnupg && \
-		yes '' | pecl install imagick && \
+		yes '' | pecl install imagick-3.4.3 && \
 		yes '' | pecl install mongodb && \
     apt-get remove -y curl autoconf libtool make pkg-config libmagickwand-dev libssl-dev && \
     apt-get autoremove -y && \
