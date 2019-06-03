@@ -11,12 +11,12 @@ pull:
 	docker pull ${TPACK_IMAGE}
 
 test:
+	# Tests are mounted from this folder, but image being tested would be whatever kubernetes pulls
+	docker run --rm -i -v ${KUBE_CONFIG}:/root/.kube -v ${PWD}:/mnt -e IMAGE_NAME=${GIT_ACCOUNT}/${IMAGE_NAME} -e TEST_PLATFORM=kubernetes -e ROUTE_URL="${ROUTE_URL}" ${TPACK_IMAGE}
+
+test_remote:
 	# Tests need to be checked-in to git
 	docker run --rm -i -v ${KUBE_CONFIG}:/root/.kube -e IMAGE_NAME=${GIT_ACCOUNT}/${IMAGE_NAME} -e TEST_PLATFORM=kubernetes -e ROUTE_URL="${ROUTE_URL}" ${TPACK_IMAGE}
-
-test_local:
-	# Tests are mounted from desktop, but image being tested would be whatever kubernetes pulls
-	docker run --rm -i -v ${KUBE_CONFIG}:/root/.kube -v ${PWD}:/mnt -e IMAGE_NAME=${GIT_ACCOUNT}/${IMAGE_NAME} -e TEST_PLATFORM=kubernetes -e ROUTE_URL="${ROUTE_URL}" ${TPACK_IMAGE}
 
 clean:
 	docker rmi ${TPACK_IMAGE}
