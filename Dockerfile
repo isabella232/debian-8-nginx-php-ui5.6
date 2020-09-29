@@ -40,14 +40,14 @@ RUN \
 	    sed -i -e 's/fastcgi_param  SERVER_PORT        $server_port;/fastcgi_param  SERVER_PORT        $http_x_forwarded_port;/g' /etc/nginx/fastcgi.conf && \
 	    sed -i -e 's/fastcgi_param  SERVER_PORT        $server_port;/fastcgi_param  SERVER_PORT        $http_x_forwarded_port;/g' /etc/nginx/fastcgi_params && \
 	    sed -i -e '/sendfile on;/a\        fastcgi_read_timeout 300\;' /etc/nginx/nginx.conf && \
-	echo "COMPOSER" && \
-		mkdir /tmp/composer/ && \
-	    cd /tmp/composer && \
-	    curl -sS https://getcomposer.org/installer | php && \
-	    mv composer.phar /usr/local/bin/composer && \
-	    chmod a+x /usr/local/bin/composer && \
-	    cd / && \
-	    rm -rf /tmp/composer && \
+	#echo "COMPOSER" && \
+	#	mkdir /tmp/composer/ && \
+	#    cd /tmp/composer && \
+	#    curl -sS https://getcomposer.org/installer | php && \
+	#    mv composer.phar /usr/local/bin/composer && \
+	#    chmod a+x /usr/local/bin/composer && \
+	#    cd / && \
+	#    rm -rf /tmp/composer && \
 	echo "PECL packages" && \
 		apt-get install -y libgpgme11-dev make pkg-config libmagickwand-dev libssl-dev && \
 		chmod 777 /usr/lib/php/${PHPVER} && \
